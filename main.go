@@ -2,32 +2,41 @@ package main
 
 import (
 	"fmt"
+	"github.com/alkapa/hola-mundo/camilo"
 	"github.com/alkapa/hola-mundo/clima"
+	"github.com/alkapa/hola-mundo/nacimiento"
 	"github.com/alkapa/hola-mundo/randal"
 )
 
 func main() {
+	yo := randal.NewRandal(nacimiento.NewNacimiento(1997, 7, 26))
+	cami := camilo.NewCamilo(nacimiento.NewNacimiento(1997, 7, 26))
+
 	println(
-		randal.Saludo("primo", "como estas?"),
+		yo.Saludo("primo", "como estas?"),
 	)
 	println(
-		randal.ComoEstaElClima(clima.ObtenerEstacionActual()),
+		yo.ComoEstaElClima(clima.ObtenerEstacionActual()),
 	)
 
-	if randal.EsMiCumpleanios() {
+	if ok, _ := yo.Cumpleanios(); ok {
 		fmt.Println("feliz cumpleanios para mi")
 	}
 
-	/*
-		TODO: crear una tipo de dato nuevo llamado Amigo
-		que va a tener 2 campos
-			- Nombre de tipo string
-			- Fecha de Nacimiento de tipo string
+	if ok, _ := cami.Cumpleanios(); ok {
+		fmt.Println("feliz cumpleanios para cami")
+	}
 
-		Buscar como crear un type struct para solucionar  esta tarea
-	*/
+	// TODO 4: convertir Amigo a Persona
+	type Amigo struct {
+		Nombre            string
+		FechaDeNacimiento string
+	}
 
-	if randal.EsTuCumpleanios("27/06/1993") {
-		fmt.Printf("feliz cumple %s", "camilo")
+	mAN := "Camilo"
+	mAF := "27/06/1993"
+
+	if yo.EsTuCumpleanios(mAF, mAN) {
+		return
 	}
 }
